@@ -1,107 +1,394 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Javi García - Links</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javi García | Músico, Escritor & Desarrollador</title>
 
-    body {
-      margin: 0;
-      font-family: 'Press Start 2P', cursive;
-      background: url('background.png'); /* Fondo de pixel art del espacio */
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center center;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem;
-      min-height: 100vh;
-    }
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      image-rendering: pixelated;
-    }
-    h1 {
-      margin: 0.5rem 0;
-      font-size: 1.2rem;
-      color: #00ffff;
-      text-shadow: 2px 2px #000;
-    }
-    p.description {
-      max-width: 600px;
-      text-align: center;
-      font-size: 0.7rem;
-      color: #fff; /* Ahora la descripción es de color blanco */
-      margin-bottom: 2rem;
-      line-height: 1.5;
-    }
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-      max-width: 400px;
-    }
-    .link-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 1rem;
-      background: #111;
-      border: 3px solid #00ffff;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #fff;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      transition: transform 0.2s, background 0.2s;
-      image-rendering: pixelated;
-    }
-    .link-btn:hover {
-      background: #222;
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 0 10px #00ffff;
-    }
-    .link-btn img {
-      width: 20px;
-      height: 20px;
-      image-rendering: pixelated;
-    }
-    footer {
-      margin-top: 3rem;
-      font-size: 0.6rem;
-      color: #777;
-      text-shadow: 1px 1px #000;
-    }
-  </style>
-</head>
-<body>
-  <img src="icono400.png" alt="Profile" class="profile-pic">
-  <h1>Javi García</h1>
-  <p class="description">
-    Multinstrumentalist musician. From rock to orchestral music, new age, and electronic sounds.
-  </p>
+    <!-- Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+            colors: {
+              ocean: {
+                50: "#f0f9ff",
+                100: "#e0f2fe",
+                200: "#bae6fd",
+                800: "#075985",
+                900: "#0c4a6e",
+              },
+              slate: {
+                850: "#1e293b",
+              },
+            },
+            animation: {
+              "fade-in-down": "fadeInDown 0.8s ease-out",
+              "fade-in-up": "fadeInUp 0.8s ease-out forwards",
+            },
+            keyframes: {
+              fadeInDown: {
+                "0%": { opacity: "0", transform: "translateY(-10px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              fadeInUp: {
+                "0%": { opacity: "0", transform: "translateY(10px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
 
-  <div class="links">
-    <a class="link-btn" href="https://www.youtube.com/@JaviGarciaS" target="_blank">▶️ YouTube</a>
-    <a class="link-btn" href="https://instagram.com/javigarciamusic" target="_blank">📷 Instagram</a>
-    <a class="link-btn" href="https://elasticstage.com/javigarcia" target="_blank">🛒 Vinyl Store</a>
-    <a class="link-btn" href="https://open.spotify.com/artist/1mW0aWzC1Au5VAmUjJlzD2" target="_blank">🎵 Spotify</a>
-    <a class="link-btn" href="https://music.apple.com/es/artist/javi-garc%C3%ADa/435160959" target="_blank">🍏 Apple Music</a>
-    <a class="link-btn" href="https://javigarcia.bandcamp.com" target="_blank">💿 Bandcamp</a>
-    <a class="link-btn" href="https://amazon.es/music/player/artists/B009WCZFN7/javi-garc%C3%ADa" target="_blank">🛒 Amazon Music</a>
-    <a class="link-btn" href="https://tidal.com/browse/artist/7594490" target="_blank">🌊 Tidal</a>
-  </div>
+    <!-- Fuente -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <footer>© 2025 Javi García</footer>
-</body>
+    <!-- CSS propio -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(to bottom, #f0f9ff 0%, #f8fafc 100%);
+        min-height: 100vh;
+      }
+    </style>
+
+    <!-- React + ReactDOM + Lucide (ESM via importmap) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react/": "https://aistudiocdn.com/react@^19.2.1/",
+          "react": "https://aistudiocdn.com/react@^19.2.1",
+          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+          "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0"
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="module">
+      import React from "react";
+      import ReactDOM from "react-dom/client";
+      import {
+        Youtube,
+        Instagram,
+        ShoppingBag,
+        Music,
+        Apple,
+        Disc,
+        ShoppingCart,
+        Waves,
+        BookOpen,
+        Smartphone,
+        Play,
+        ChevronRight,
+        Mail,
+      } from "lucide-react";
+
+      // --- DATOS ---
+      const PROFILE = {
+        name: "Javi García",
+        role: "Músico, Escritor & Desarrollador",
+        bio: "Compositor de historias, melodías y código. Buscando siempre la armonía entre la narrativa y la tecnología.",
+        avatar:
+          "https://m.media-amazon.com/images/S/amzn-author-media-prod/napoqfq9gbikn0f9desjqnjabl._SY600_.jpg",
+        email: "info (at) javigarcia.com",
+      };
+
+      const SOCIAL_LINKS = [
+        { platform: "YouTube", url: "https://www.youtube.com/@JaviGarciaS", icon: Youtube },
+        { platform: "Instagram", url: "https://instagram.com/javigarciamusic", icon: Instagram },
+        { platform: "Vinyl Store", url: "https://elasticstage.com/javigarcia", icon: ShoppingBag },
+        { platform: "Spotify", url: "https://open.spotify.com/artist/1mW0aWzC1Au5VAmUjJlzD2", icon: Music },
+        { platform: "Apple Music", url: "https://music.apple.com/es/artist/javi-garc%C3%ADa/435160959", icon: Apple },
+        { platform: "Bandcamp", url: "https://javigarcia.bandcamp.com", icon: Disc },
+        { platform: "Amazon Music", url: "https://amazon.es/music/player/artists/B009WCZFN7/javi-garc%C3%ADa", icon: ShoppingCart },
+        { platform: "Tidal", url: "https://tidal.com/browse/artist/7594490", icon: Waves },
+      ];
+
+      const ITEMS = [
+        {
+          id: "b-silencio",
+          type: "BOOK",
+          title: "El silencio del mar",
+          description: "Una novela histórica sobre las exploraciones en la Alta California del siglo XVIII",
+          url: "https://www.amazon.es/silencio-del-mar-Javier-Garc%C3%ADa/dp/B0G5GVTHJP/",
+          ctaText: "Ver en Amazon",
+          imageUrl: "https://javigarcia.com/elsilenciodelmarportada.jpg",
+        },
+        {
+          id: "m-fama",
+          type: "MUSIC",
+          title: "Fama",
+          description: "Recopilatorio de temas compuestos a lo largo de los dos últimos años",
+          url: "https://open.spotify.com/intl-es/album/2V5B7An4cVnYFPZCTw7iRq?si=tmaHn5X_TCulgKWaH4QArw",
+          ctaText: "Escuchar en Spotify",
+          imageUrl: "https://javigarcia.com/fama.jpg",
+        },
+        {
+          id: "v-bigband",
+          type: "VIDEO",
+          title: "The Big Band",
+          description: "Videoclip de uno de los temas de mi primer álbum",
+          url: "https://youtu.be/FeU-19rLDmc?si=UHW_fWLEo_oSoUad",
+          ctaText: "Ver en YouTube",
+          imageUrl: "https://javigarcia.com/thebigband.jpg",
+        },
+        {
+          id: "a-podrida",
+          type: "APP",
+          title: "La Podrida",
+          description: "Vuelta a las pantallas 15 años después del lanzamiento de iPocha",
+          url: "https://javigarcia.com/lapodrida/",
+          ctaText: "Jugar ahora",
+          imageUrl: "https://javigarcia.com/lapodrida.jpg",
+        },
+      ];
+
+      // --- COMPONENTES ---
+      const FeaturedCard = ({ item }) => {
+        const Icon =
+          {
+            MUSIC: Music,
+            BOOK: BookOpen,
+            APP: Smartphone,
+            VIDEO: Play,
+          }[item.type] || Music;
+
+        const typeLabel =
+          {
+            MUSIC: "Música",
+            BOOK: "Libro",
+            APP: "App",
+            VIDEO: "Video",
+          }[item.type] || "Contenido";
+
+        const badgeColors =
+          {
+            MUSIC: "bg-rose-50 text-rose-700 border-rose-100",
+            BOOK: "bg-blue-50 text-blue-700 border-blue-100",
+            APP: "bg-emerald-50 text-emerald-700 border-emerald-100",
+            VIDEO: "bg-red-50 text-red-700 border-red-100",
+          }[item.type] || "bg-slate-50 text-slate-700 border-slate-100";
+
+        return React.createElement(
+          "a",
+          {
+            href: item.url,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            className: "group block mb-6",
+          },
+          React.createElement(
+            "div",
+            {
+              className:
+                "bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row",
+            },
+            React.createElement(
+              "div",
+              {
+                className:
+                  "sm:w-32 w-full h-40 sm:h-auto shrink-0 overflow-hidden relative border-b sm:border-b-0 sm:border-r border-slate-50",
+              },
+              React.createElement("img", {
+                src: item.imageUrl,
+                alt: item.title,
+                className:
+                  "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500",
+              }),
+              React.createElement(
+                "div",
+                {
+                  className:
+                    "absolute top-2 left-2 bg-white/90 backdrop-blur-sm p-1.5 rounded-lg shadow-sm border border-slate-100",
+                },
+                React.createElement(Icon, { size: 14, className: "text-slate-700" })
+              )
+            ),
+            React.createElement(
+              "div",
+              { className: "p-5 flex flex-col justify-center flex-grow" },
+              React.createElement(
+                "span",
+                {
+                  className:
+                    `inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border mb-2 w-fit ${badgeColors}`,
+                },
+                typeLabel
+              ),
+              React.createElement(
+                "h3",
+                { className: "text-lg font-bold text-slate-800 mb-1" },
+                item.title
+              ),
+              React.createElement(
+                "p",
+                { className: "text-slate-500 text-sm leading-snug mb-3" },
+                item.description
+              ),
+              React.createElement(
+                "div",
+                {
+                  className:
+                    "mt-auto flex items-center text-xs font-bold text-slate-900 group-hover:text-blue-600 transition-colors uppercase tracking-tight",
+                },
+                item.ctaText,
+                React.createElement(ChevronRight, { size: 14, className: "ml-0.5" })
+              )
+            )
+          )
+        );
+      };
+
+      const ContactInfo = () =>
+        React.createElement(
+          "div",
+          {
+            className:
+              "bg-white border border-slate-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4 group",
+          },
+          React.createElement(
+            "div",
+            {
+              className:
+                "w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform",
+            },
+            React.createElement(Mail, { size: 20 })
+          ),
+          React.createElement(
+            "div",
+            null,
+            React.createElement(
+              "p",
+              {
+                className:
+                  "text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5",
+              },
+              "Escríbeme a"
+            ),
+            React.createElement(
+              "p",
+              {
+                className:
+                  "text-base font-bold text-slate-800 tracking-tight select-all",
+              },
+              PROFILE.email
+            )
+          )
+        );
+
+      const App = () =>
+        React.createElement(
+          "div",
+          { className: "max-w-xl mx-auto py-12 px-6" },
+          React.createElement(
+            "header",
+            {
+              className:
+                "flex flex-col items-center text-center mb-12 animate-fade-in-down",
+            },
+            React.createElement("img", {
+              src: PROFILE.avatar,
+              alt: PROFILE.name,
+              className:
+                "w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg mb-4",
+            }),
+            React.createElement(
+              "h1",
+              { className: "text-2xl font-bold text-slate-800 tracking-tight" },
+              PROFILE.name
+            ),
+            React.createElement(
+              "p",
+              {
+                className:
+                  "text-blue-600 text-xs font-bold uppercase tracking-[0.2em] mb-3",
+              },
+              PROFILE.role
+            ),
+            React.createElement(
+              "p",
+              {
+                className:
+                  "text-slate-500 text-sm max-w-sm mb-8 leading-relaxed font-medium",
+              },
+              PROFILE.bio
+            ),
+            React.createElement(
+              "div",
+              { className: "grid grid-cols-2 sm:grid-cols-4 gap-3 w-full" },
+              SOCIAL_LINKS.map((link) =>
+                React.createElement(
+                  "a",
+                  {
+                    key: link.platform,
+                    href: link.url,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    className:
+                      "flex items-center gap-2.5 px-3 py-2 bg-white border border-slate-100 rounded-lg text-slate-600 hover:text-blue-600 hover:border-blue-100 hover:shadow-sm transition-all group",
+                  },
+                  React.createElement(link.icon, {
+                    size: 16,
+                    strokeWidth: 2,
+                    className:
+                      "shrink-0 text-slate-400 group-hover:text-blue-600",
+                  }),
+                  React.createElement(
+                    "span",
+                    { className: "text-xs font-bold tracking-tight" },
+                    link.platform
+                  )
+                )
+              )
+            )
+          ),
+          React.createElement(
+            "main",
+            { className: "animate-fade-in-up" },
+            React.createElement(
+              "h2",
+              {
+                className:
+                  "text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] mb-6 border-b border-slate-100 pb-2",
+              },
+              "Obras Destacadas"
+            ),
+            ITEMS.map((item) => React.createElement(FeaturedCard, { key: item.id, item })),
+            React.createElement(
+              "h2",
+              {
+                className:
+                  "text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] mt-12 mb-6 border-b border-slate-100 pb-2",
+              },
+              "Contacto Directo"
+            ),
+            React.createElement(ContactInfo, null)
+          ),
+          React.createElement(
+            "footer",
+            { className: "mt-16 text-center border-t border-slate-50 pt-8 pb-12 opacity-50" },
+            React.createElement(
+              "p",
+              { className: "text-[10px] font-bold text-slate-400 uppercase tracking-widest" },
+              `© ${new Date().getFullYear()} Javi García`
+            )
+          )
+        );
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(React.createElement(React.StrictMode, null, React.createElement(App)));
+    </script>
+  </body>
 </html>
